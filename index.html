@@ -409,12 +409,108 @@
     .feature-icon {
       font-size: 1.5rem;
     }
+    .winner-profile-section {
+      margin: 1.5rem 0;
+    }
+    .winner-profile-card {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 16px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+    .winner-profile-card:hover {
+      background: rgba(0, 0, 0, 0.3);
+      transform: translateX(5px);
+    }
+    .profile-avatar {
+      position: relative;
+      flex-shrink: 0;
+    }
+    .profile-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid rgba(102, 126, 234, 0.5);
+      object-fit: cover;
+    }
+    .profile-rank {
+      position: absolute;
+      bottom: -3px;
+      right: -3px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.7rem;
+      color: white;
+      border: 2px solid #0a0e27;
+    }
+    .rank-1 {
+      background: linear-gradient(135deg, #ffd93d 0%, #ff9a00 100%);
+      box-shadow: 0 4px 16px rgba(255, 217, 61, 0.5);
+    }
+    .rank-2 {
+      background: linear-gradient(135deg, #c0c0c0 0%, #8c8c8c 100%);
+      box-shadow: 0 4px 16px rgba(192, 192, 192, 0.5);
+    }
+    .rank-3 {
+      background: linear-gradient(135deg, #cd7f32 0%, #a0522d 100%);
+      box-shadow: 0 4px 16px rgba(205, 127, 50, 0.5);
+    }
+    .profile-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .profile-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .profile-stats {
+      display: flex;
+      gap: 2rem;
+    }
+    .profile-stat {
+      text-align: left;
+    }
+    .profile-stat-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffd93d;
+    }
+    .profile-stat-label {
+      font-size: 0.8rem;
+      color: #b0b8d4;
+      margin-top: 0.15rem;
+    }
     @media (max-width: 768px) {
       .hero h1 {
         font-size: 2rem;
       }
       .milestone-grid {
         grid-template-columns: 1fr;
+      }
+      .winner-profile-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      .profile-info {
+        align-items: center;
+      }
+      .profile-stats {
+        justify-content: center;
+      }
+      .profile-stat {
+        text-align: center;
       }
       .nav-pills {
         gap: 0.75rem;
@@ -427,6 +523,57 @@
         padding: 2rem 1.5rem;
       }
     }
+
+ <!-- Text box inside the card -->
+ .image-profile-card {
+  background: #181e27;
+  border-radius: 16px;
+  box-shadow: 0 4px 32px rgba(15, 20, 41, 0.35);
+  padding: 12px;
+  margin: 20px auto;
+  max-width: 420px;        /* similar width to an IG portrait on mobile */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.milestone-img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 2 / 2;     /* Instagram portrait ratio */
+  height: auto;
+  object-fit: contain;     /* keep full image so text is readable */
+  border-radius: 12px;
+}
+
+
+.winner-profile-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* right side as a row: text + trophy */
+.profile-right {
+  display: flex;
+  justify-content: space-between;  /* pushes trophy to far right */
+  align-items: center;
+  width: 100%;
+}
+
+/* stack text nicely */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* trophy look */
+.profile-trophy {
+  font-size: 28px;
+  margin-left: 16px;
+}
+
   </style>
 </head>
 <body>
@@ -438,9 +585,10 @@
     </div>
 
     <div class="nav-pills">
-      <button class="nav-pill active" onclick="switchSection(0)">Current Milestone</button>
-      <button class="nav-pill" onclick="switchSection(1)">Upcoming</button>
-      <button class="nav-pill" onclick="switchSection(2)">Prize Pool</button>
+      <button class="nav-pill active" onclick="switchSection(0)">Winners</button>
+      <button class="nav-pill" onclick="switchSection(1)">Current Milestone</button>
+      <button class="nav-pill" onclick="switchSection(2)">Upcoming</button>
+      <button class="nav-pill" onclick="switchSection(3)">Prize Pool</button>
     </div>
 
     <div id="section-0" class="section active">
@@ -448,39 +596,92 @@
         <div class="milestone-card">
           <div class="milestone-header">
             <div class="milestone-icon">🎉</div>
-            <div class="status-badge status-completed">Live</div>
+            <div class="status-badge status-completed">Completed</div>
           </div>
           <h2 class="milestone-title">1K+ Views Milestone</h2>
-          <div class="milestone-prize">💰 ₹1,000 Cash Prize</div>
+          <div class="milestone-prize">🏆 Winners Announced</div>
           
           <div class="info-box">
             <div class="info-row">
-              <span class="info-label">Contest Ends:</span>
+              <span class="info-label">Contest Ended:</span>
               <span class="info-value">30 Nov, 2025</span>
             </div>
             <div class="info-row">
-              <span class="info-label">Winner Announcement:</span>
+              <span class="info-label">Announced:</span>
               <span class="info-value">1 Dec, 2025</span>
             </div>
           </div>
 
-          <div class="secret-gift-box">
-            <div class="secret-title">🎁 Secret Gift for All Participants</div>
-            <p class="secret-text">Every participant receives a special gift that will be revealed on the result announcement day (1 Dec, 2025)</p>
-          </div>
+     <div class="winner-profile-card winner-1-card">
+  <div class="profile-avatar">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjW3PRSLLIdUQIi72_-rwUkvXBLES082__Nga55v4AWKCzlMKkUs6WBi8SUtO1tfPLJXOUObvDULJDxGF7Ky7g-V_Wy5Hdl6Wi2N8tJoj1qnFjjgG4qYouiXCGSz-emlrtbBixzh6Kg6wMPxs-izqxknFRySkWVCZXQGBI5DJX52MioxAxL4KZ9AHi8-MuV/s150/1.jpg" alt="Winner 1" class="profile-img">
+    <div class="profile-rank rank-1">1st</div>
+  </div>
 
-          <div class="steps-container">
-            <div class="step-item">
-              <div class="step-number">1</div>
-              <div class="step-text">Follow @inspirevibes.now on Instagram</div>
+  <!-- Right side: text + trophy -->
+  <div class="profile-right">
+    <div class="profile-info">
+      <div class="profile-name">@princyangle_08</div>
+      <div class="profile-stat-label">Sushmita uniyal ❣️</div>
+      <div class="profile-stats">
+        <div class="profile-stat">
+          <div class="profile-stat-value">₹1,000</div>
+          <div class="profile-stat-label">Cash Prize</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trophy at the end -->
+    <div class="profile-trophy">🏆</div>
+  </div>
+</div>
+
+  <!-- Inserted image as a card -->
+  <div class="image-profile-card">
+ <div class="secret-gift-box">
+            <div class="secret-title"></div>
+            <p class="secret-text">🎁 Other 5 Winners who Received Secret Gifts of ₹200 cash & ₹100 Amazon Gift Voucher </p>
+        
+
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiO2UNi1Q7BfLbbs7fiW-IVhXwAE8WWSSyap4YBROK-DQcm8EgHrHgUDbXIYQWYkTT66G0qfxSSbQKLv9k3O0SVIakw1fuQ0oeivRYP0YdEaOaneJz188uqNTiSJXHobPVnDwg-BBhV_QY95By-jYZlgluuEUb7jvpcskVOC1ndYJbi_e_tsCmLvgnsFFr9/s1280/WhatsApp%20Image%202025-12-01%20at%201.10.12%20AM.jpeg" alt="Milestone Banner" class="milestone-img">
+  </div>  </div>
+           
+          <div class="secret-gift-box">
+            <div class="secret-title">🎁 All Participants Received Secret Gift</div>
+            <p class="secret-text">Thank you to everyone who participated! All gifts have been sent via DM.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="section-1" class="section">
+      <div class="milestone-grid">
+        <div class="milestone-card">
+          <div class="milestone-header">
+            <div class="milestone-icon">🚀</div>
+            <div class="status-badge status-upcoming">Upcoming</div>
+          </div>
+          <h2 class="milestone-title">1,500 Followers</h2>
+          <div class="milestone-prize">💎 ₹3,000+ Worth Gifts</div>
+          <div class="info-box">
+            <div class="info-row">
+              <span class="info-label">Winners:</span>
+              <span class="info-value">3 Lucky Winners Receive ₹1000</span>
+              <span class="info-label">Other:</span>
+              <span class="info-value">3 Lucky Winners Receive Gifts from Gifts Categories</span>
             </div>
-            <div class="step-item">
-              <div class="step-number">2</div>
-              <div class="step-text">Like the contest post on our profile</div>
-            </div>
-            <div class="step-item">
-              <div class="step-number">3</div>
-              <div class="step-text">Comment your most inspiring caption or message</div>
+          </div>
+          <div class="secret-gift-box">
+            <div class="secret-title">🎁 Secret Gift for All</div>
+            <p class="secret-text">Will be revealed on result announcement day</p>
+          </div>
+          <p style="color:#b0b8d4; font-style:italic; margin-top:1rem;">Complete details and entry requirements will be announced when we reach this milestone</p>
+        </div> </div>
+
+
+
+
+
             </div>
           </div>
         </div>
@@ -494,8 +695,14 @@
             <div class="milestone-icon">🚀</div>
             <div class="status-badge status-upcoming">Upcoming</div>
           </div>
-          <h2 class="milestone-title">1,000 Followers</h2>
-          <div class="milestone-prize">💎 ₹2,500 Worth Gifts</div>
+          <h2 class="milestone-title">5,000 Followers</h2>
+          <div class="milestone-prize">💎 ₹5,000+ Worth Gifts</div>
+    <div class="info-box">
+            <div class="info-row">
+              <span class="info-label">Winners:</span>
+              <span class="info-value">5 Lucky Winners</span>
+            </div>
+          </div>
           <div class="secret-gift-box">
             <div class="secret-title">🎁 Secret Gift for All</div>
             <p class="secret-text">Will be revealed on result announcement day</p>
@@ -508,12 +715,12 @@
             <div class="milestone-icon">🌠</div>
             <div class="status-badge status-upcoming">Upcoming</div>
           </div>
-          <h2 class="milestone-title">5,000 Followers</h2>
-          <div class="milestone-prize">🏆 ₹5,000 Worth Gifts</div>
+          <h2 class="milestone-title">10,000 Followers</h2>
+          <div class="milestone-prize">🏆 ₹10,000+ Worth Gifts</div>
           <div class="info-box">
             <div class="info-row">
               <span class="info-label">Winners:</span>
-              <span class="info-value">2 Lucky Winners</span>
+              <span class="info-value">10 Lucky Winners</span>
             </div>
           </div>
           <div class="secret-gift-box">
@@ -528,12 +735,12 @@
             <div class="milestone-icon">🌟</div>
             <div class="status-badge status-upcoming">Upcoming</div>
           </div>
-          <h2 class="milestone-title">10,000 Followers</h2>
-          <div class="milestone-prize">⭐ ₹10,000+ Worth Gifts</div>
+          <h2 class="milestone-title">15,000 Followers</h2>
+          <div class="milestone-prize">⭐ ₹15,000+ Worth Gifts</div>
           <div class="info-box">
             <div class="info-row">
               <span class="info-label">Winners:</span>
-              <span class="info-value">5 Lucky Winners</span>
+              <span class="info-value">10 Lucky Winners</span>
             </div>
           </div>
           <div class="secret-gift-box">
